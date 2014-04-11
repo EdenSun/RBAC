@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-2.5.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"> 
+    <!-- jdbc.properties文件路径  --> 
+    <bean 
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" 
+        value="classpath:/eden/sun/rbac/config/db/jdbc.properties" /> 
+    </bean> 
+    
+    <!--  数据源的配置  -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+        destroy-method="close"> 
+        <property name="driverClassName" value="${jdbc.driver}" /> 
+        <property name="url" value="${jdbc.url}" /> 
+        <property name="username" value="${jdbc.user}" /> 
+        <property name="password" value="${jdbc.password}" /> 
+        <!-- data source configuration  -->
+        <property name="initialSize" value="60" /><!-- initial connections -->  
+        <property name="maxActive" value="100" /><!-- MAX connections --> 
+        <property name="maxIdle" value="50" /><!-- MAX idle connections -->  
+        <property name="minIdle" value="10" /><!--  MIN idle connections -->  
+        <!-- 处理mysql 8小时自动断开连接的问题  --> 
+        <property name="testWhileIdle" value="true" /> 
+        <property name="testOnBorrow" value="false" /> 
+        <property name="testOnReturn" value="false" /> 
+        <property name="validationQuery" value="select 1" /> 
+        <property name="timeBetweenEvictionRunsMillis" value="20000" /> 
+        <property name="numTestsPerEvictionRun" value="100" /> 
+    </bean> 
+    
+    <!-- MyBatis sqlSessionFactory 配置 mybatis --> 
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->  
+        <property name="mapperLocations" value="classpath:eden/sun/rbac/dao/mapping/*.xml" />  
+    </bean>  
+    
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="eden.sun.rbac.dao" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
+    </bean>  
+    
+    <!-- 事务相关控制 -->
+    <bean id="transactionManager" 
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+        <property name="dataSource" ref="dataSource" /> 
+    </bean> 
+    <tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+        <tx:attributes> 
+            <tx:method name="*" propagation="REQUIRED" read-only="false" 
+                rollback-for="java.lang.Exception"/> 
+        </tx:attributes> 
+    </tx:advice> 
+    <aop:config> 
+        <aop:pointcut id="pc" 
+            expression="execution(* eden.sun.rbac.service.*.*(..))" /> 
+             <!-- 把事务控制在Business层 -->
+        <aop:advisor pointcut-ref="pc" advice-ref="txAdvice" /> 
+    </aop:config> 
+    
+</beans>
