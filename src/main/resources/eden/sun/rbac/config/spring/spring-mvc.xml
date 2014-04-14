@@ -34,7 +34,7 @@
     <!-- Controller 跳转的JSP页面路径 和 文件的后缀  --> 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/WEB-INF/pages/" p:suffix=".jsp" /> 
+		p:prefix="/app/module/" p:suffix=".jsp" /> 
         
     <!-- 文件上传 -->
 	<bean id="multipartResolver"
