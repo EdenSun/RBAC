@@ -1,17 +1,17 @@
 /**
- * define RBAC.MainPageService 
+ * define RBAC.UserManagerService 
  */
 
-rbacApp.service('RBAC.MainPageService',function($http, $q){
+rbacApp.service('RBAC.UserManagerService',function($http, $q){
 	/*var _dataCache = $angularCacheFactory('dataCache', {
         maxAge: 3600000 // items expire after an hour
     });*/
     /**
-     * @class RBAC.MainPageService
+     * @class RBAC.UserManagerService
      */
     return {
         test: function (input) {
-            var output = 'test function called';
+            var output = 'UserManager';
             // do something with the data
             return output;
         }
