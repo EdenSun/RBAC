@@ -10,15 +10,19 @@
 		<script type="text/javascript" src='<c:url value="/app/module/main-page/main-page-service.js"/>'></script>
 		<script type="text/javascript" src='<c:url value="/app/module/main-page/main-page-controller.js"/>'></script>
 	</head>
-	<body ng-controller="RBAC.MainPageController" ng-init="initPage">
+	<body ng-controller="RBAC.MainPageController" ng-init="initPage()">
 		
 		<div class="ui-layout-west">
-		
 			<div class="header">Outer - West</div>
-		
+			<div class="icon-input">
+				<input type="text" class="form-control">
+				<span class="glyphicon glyphicon-filter"></span>
+			</div>
+			
+			
 			<div class="content">
-				<h3><b>Outer Layout</b></h3>
-				<ul>
+				<p>Here should be a tree menu list</p>
+				<!-- <ul>
 					<li><a href="#" onClick="outerLayout.toggle('north')">Toggle North</a></li>
 					<li><a href="#" onClick="outerLayout.toggle('south')">Toggle South</a></li>
 					<li><a href="#" onClick="outerLayout.toggle('west')"> Toggle West</a></li>
@@ -53,7 +57,7 @@
 					<li><a href="#" onClick="showState(outerLayout,'west')">      Show State.West</a></li>
 					<li><a href="#" onClick="showState(outerLayout,'east')">      Show State.East</a></li>
 					<li><a href="#" onClick="showState(outerLayout,'center')">    Show State.Center</a></li>
-				</ul>
+				</ul> -->
 			</div>
 		
 			<div class="footer">Automatically positioned footer</div>
@@ -118,13 +122,15 @@
 			<div class="content">
 				I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
 			</div>
-			<ul class="toolbar">
-				<li id="tbarToggleNorth" class="first"><span></span>Toggle NORTH</li>
-				<li id="tbarOpenSouth"><span></span>Open SOUTH</li>
-				<li id="tbarCloseSouth"><span></span>Close SOUTH</li>
-				<li id="tbarPinWest"><span></span>Pin/Unpin WEST</li>
-				<li id="tbarPinEast" class="last"><span></span>Pin/Unpin EAST</li>
-			</ul>
+			
+			<div class="common-tab-wrap">
+				<ul class="nav nav-tabs" id="commonTab">
+					<li class="active"><a href="#home" data-toggle="tab">Home<span class="close">&times;</span></a></li>
+					<li><a href="#profile" data-toggle="tab">Profile<span class="close">&times;</span></a></li>
+					<li><a href="#messages" data-toggle="tab">Messages<span class="close">&times;</span></a></li>
+					<li><a href="#settings" data-toggle="tab">Settings<span class="close">&times;</span></a></li>
+				</ul>
+			</div>
 		</div>
 		
 		
@@ -140,32 +146,16 @@
 			<!-- DIVs for the INNER LAYOUT -->
 		
 			<div class="ui-layout-center">
-				<h3 class="header">Inner - Center</h3>
-				<div class="ui-layout-content">
 				
-					<p id="createInner2" style="font-weight: bold;"><a href="#" onClick="createInnerLayout(); return false;"
-						>Click here to CREATE the Inner Layout</a></p><!-- outerLayout.open('east');  -->
-		
-					<p>See the <a href="#" onclick="outerLayout.open('east'); return false;">Outer-East pane</a> for commands to manipulate the Inner Layout</p>
-		
-					<p><a href="../demos.html">Go to the Demos page</a></p>
-		
-					<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-					<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-					<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-					<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+				<div class="ui-layout-content">
+					<div class="tab-content">
+						<div class="tab-pane active" id="home">home</div>
+						<div class="tab-pane" id="profile">profile</div>
+						<div class="tab-pane" id="messages">messages</div>
+						<div class="tab-pane" id="settings">settings</div>
+					</div>
 				</div>
-				<div class="footer">Center panes can have headers &amp; footers too</div>
-			</div>
-		
-			<div class="ui-layout-north"> Inner - North</div>
-			<div class="ui-layout-south"> Inner - South</div>
-			<div class="ui-layout-west">  Inner - West</div>
-			<div class="ui-layout-east">  Inner - East
-				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
-				<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+				
 			</div>
 		
 		</div>
