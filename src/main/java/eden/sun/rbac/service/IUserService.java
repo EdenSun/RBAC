@@ -1,5 +1,6 @@
 package eden.sun.rbac.service;
 
-public interface IUserService {
+import eden.sun.rbac.exception.ServiceException;
 
+public interface IUserService {
 }
