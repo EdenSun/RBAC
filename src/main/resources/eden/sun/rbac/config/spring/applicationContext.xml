@@ -16,7 +16,7 @@
     <bean 
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" 
-        value="classpath:/eden/sun/rbac/config/db/jdbc.properties" /> 
+        value="classpath:eden/sun/rbac/config/db/jdbc.properties" /> 
     </bean> 
     
     <!--  数据源的配置  -->
@@ -44,7 +44,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSource" />  
         <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->  
-        <property name="mapperLocations" value="classpath:eden/sun/rbac/dao/mapping/*.xml" />  
+        <property name="mapperLocations" value="classpath:eden/sun/rbac/dao/mapper/*.xml" />  
     </bean>  
     
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
