@@ -1,0 +1,40 @@
+{
+    "name": "MainFramework",
+    "settings": {},
+    "xdsVersion": "2.2.2",
+    "xdsBuild": 991,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000503,
+    "framework": "ext42",
+    "topInstanceFileMap": {
+        "cf78b4ee-8fda-4138-99a6-a904552e54e3": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        },
+        "6536dc4f-ced9-43a5-824c-226799038428": {
+            "paths": [
+                "metadata/view/MainViewport",
+                "app/view/override/MainViewport.js",
+                "app/view/MainViewport.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "MainViewport"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "6536dc4f-ced9-43a5-824c-226799038428"
+        ],
+        "store": [],
+        "controller": [],
+        "model": [],
+        "resource": [
+            "cf78b4ee-8fda-4138-99a6-a904552e54e3"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}
